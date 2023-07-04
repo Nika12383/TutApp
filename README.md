@@ -1,4 +1,4 @@
 # TutApp
 ## Hello Git!
-## It's Shurik!
+## It's your mom!
 ## We are here!
