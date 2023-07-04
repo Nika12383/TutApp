@@ -1,4 +1,4 @@
 # TutApp
 ## Hello Git!
-## It's Royce!
+## It's Shurik!
 ## We are here!
