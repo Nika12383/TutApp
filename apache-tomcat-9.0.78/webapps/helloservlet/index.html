@@ -1,0 +1,29 @@
+<html>
+<head>
+  <title>Flowershop</title>
+</head>
+<body>
+  <h2>Flowershop</h2>
+  <form method="get" action="query">
+    Choose a flower type:<br /><br />
+    <input type="checkbox" name="type" value="Roses" />Roses
+    <input type="checkbox" name="type" value="Tulips" />Tulips
+    <input type="checkbox" name="type" value="Orchids" />Orchids
+    <input type="checkbox" name="type" value="Lilies" />Lilies
+    <input type="submit" value="Search" />
+  </form>
+
+  <form method="post" action="update">
+    Add a flower:<br>
+    <label for="fname">Type:</label><br>
+    <input type="text" id="fname" name="type"><br>
+    <label for="lname">Color:</label><br>
+    <input type="text" id="lname" name="color"><br>
+    <label for="price">Price:</label><br>
+    <input type="text" id="price" name="price"><br>
+    <label for="qty">Quantity:</label><br>
+    <input type="text" id="qty" name="qty">
+    <input type="submit" value="Submit" />
+  </form>
+</body>
+</html>
