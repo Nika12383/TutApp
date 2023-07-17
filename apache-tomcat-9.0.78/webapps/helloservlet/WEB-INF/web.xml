@@ -3,24 +3,18 @@
   xmlns="http://java.sun.com/xml/ns/javaee"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
- 
-  <!-- To save as <CATALINA_HOME>\webapps\helloservlet\WEB-INF\web.xml -->
- 
-   <!--
-   <servlet>
-      <servlet-name>EchoServletExample</servlet-name>
-      <servlet-class>mypkg.EchoServlet</servlet-class>
-   </servlet>
-   -->
- 
-   <!-- Note: All <servlet> elements MUST be grouped together and
-         placed IN FRONT of the <servlet-mapping> elements -->
- 
-   <!--
-   <servlet-mapping>
-      <servlet-name>EchoServletExample</servlet-name>
-      <url-pattern>/echo</url-pattern>
-   </servlet-mapping>
-   -->
+
+  
+
+<security-constraint>
+    <web-resource-collection>
+        <web-resource-name>helloservlet</web-resource-name>
+        <url-pattern>/query   </url-pattern>
+    </web-resource-collection>
+    <user-data-constraint>
+        <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+    </user-data-constraint>
+  </security-constraint>
+  
 
 </web-app>
