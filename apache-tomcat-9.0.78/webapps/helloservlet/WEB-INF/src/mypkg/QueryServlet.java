@@ -33,13 +33,17 @@ public class QueryServlet extends HttpServlet {
          Statement stmt = conn.createStatement();
       ) {
          // Step 3: Execute a SQL SELECT query
-         String sqlStr = "select * from flowers where type = "
-               + "'" + request.getParameter("type") + "'"   // Single-quote SQL string
-               + " and qty > 0 order by price desc";
+         String picked_subject = request.getParameter("subject");
+         String student_name = request.getParameter("student_name");
+         String subject_id = sqlServer.query("select subject_id from subjects where subject_name = '" + picked_subject + "';");
+         String student_id = sqlServer.query("select student_id from students where student_name = '" + student_name + "';");
+         sqlServer.update("insert into students-subjects (" + subject_id + ", "+ student_id + ");");
 
          out.println("<h3>Thank you for your query.</h3>");
          out.println("<p>Your SQL statement is: " + sqlStr + "</p>"); // Echo for d ugging
          ResultSet rset = stmt.executeQuery(sqlStr);  // Send the query to the server
+
+         
 
          // Step 4: Process the query result set
          int count = 0;
