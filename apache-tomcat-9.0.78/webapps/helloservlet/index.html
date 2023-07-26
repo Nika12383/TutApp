@@ -1,35 +1,29 @@
 <html>
-<head>
-  <title>Flowershop</title>
-  <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.js" type="text/javascript"></script>
-  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js" type="text/javascript"></script>
-  <script type="text/javascript" src="js/script.js"></script>
-
+<head>  <title>Flowershop</title>
 </head>
 <body>
   <h2>Flowershop</h2>
-  <form id="myAjaxRequestForm" method="get" action="poopoo">
-    <fieldset>
-        <legend>jQuery Ajax Form data Submit Request</legend>
+  <form method="get" action="query">
+    Choose a flower type:<br /><br />
+    <input type="checkbox" name="type" value="Roses" />Not Rose
+    <input type="checkbox" name="type" value="Tulips" />Tulips
+    <input type="checkbox" name="type" value="Orchids" />Orchids
+    <input type="checkbox" name="type" value="Lilies" />Lilies
+    <input type="submit" value="Search" />
+  </form>
 
-            <p>
-                <label for="countryCode">Country Code:</label>
 
-                <input id="countryCode" type="text" name="countryCode" />
-            </p>
-            <p>
-                <input id="myButton" type="button" value="Submit"/>
-            </p>
-    </fieldset>
-</form>
-<div id="anotherSection">
-    <fieldset>
-        <legend>Response from jQuery Ajax Request</legend>
-             <div id="ajaxResponse"></div>
-    </fieldset>
-</div> 
-  
-
+  <form method="post" action="update">
+    Add a flower:<br>
+    <label for="fname">Type:</label><br>
+    <input type="text" id="fname" name="type"><br>
+    <label for="lname">Color:</label><br>
+    <input type="text" id="lname" name="color"><br>
+    <label for="price">Price:</label><br>
+    <input type="text" id="price" name="price"><br>
+    <label for="qty">Quantity:</label><br>
+    <input type="text" id="qty" name="qty">
+    <input type="submit" value="Submit" />
+  </form>
 </body>
 </html>

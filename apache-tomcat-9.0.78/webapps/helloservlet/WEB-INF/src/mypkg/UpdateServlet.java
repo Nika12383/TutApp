@@ -23,7 +23,7 @@ public class UpdateServlet extends HttpServlet{
         try (
             Connection conn = DriverManager.getConnection(
             "jdbc:mysql://localhost:3306/flowershop?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC",
-            "myuser", "user1986");
+            "myuser", "1986");
 
             Statement stmt = conn.createStatement();
         ) {
