@@ -4,11 +4,11 @@ $(document).ready(function() {
         });
 
         $('#myButton').click(function(event) {
-                var flowerType = $('#myForm').serialize();
+                var formInput = $('#myForm').serialize();
                 $.ajax({
                     url: 'AppController',
                     type: "GET",
-                    data: flowerType,
+                    data: formInput,
                     dataType: "text",
                     success : function(responseText) {
                         $('#ajaxResponse').text(responseText);

@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.PrintWriter;
 
 @WebServlet("/AppController")
-public class AppController extends HttpServlet {
+public class royce_sketch extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -17,7 +17,7 @@ public class AppController extends HttpServlet {
             userName = "Guest";
         }
 
-        String greetings = "Hello " + userName;
+        String greetings = "Your flower is: " + userName;
 
 
         PrintWriter out = response.getWriter();
