@@ -1,0 +1,6 @@
+mysql/
+mysql-connector-j-8.1.0/
+mysql-connector-j-8.0.33/
+apache-tomcat-9.0.78/*
+!apache-tomcat-9.0.78/webapps/
+apache-maven-3.9.3/
