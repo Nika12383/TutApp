@@ -1,9 +1,11 @@
 package com.example;
 public class MainClass {
     public static void main(String[] args){
-        RunEngine r = new RunEngine();
-        r.NewUser("Tutor", "jim", "he/him",
-                "abcd@gmail.com", "123@yrdsb.ca", "abcd@gmail.com");
-        r.AssignSubject("jim", "Math", 11);
+        // RunEngine.NewUser("Tutor", "Nika", "she/her",
+                // "nika.gulbit@gmail.com", "2357235@yrdsb.ca", "sdiana@gmail.com");
+        // RunEngine.AssignSubject("nika.gulbit@gmail.com", "Math", 11);
+
+        String out = RunEngine.searchTutors("Tutor", "Math", 11);
+        System.out.println(out);
     }
 }
