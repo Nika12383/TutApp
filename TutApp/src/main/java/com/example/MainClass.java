@@ -1,9 +1,9 @@
 package com.example;
 public class MainClass {
     public static void main(String[] args) {
-        RunEngine.NewUser("Tutor", "jim1", "he/him",
-                "abcd@gmail.com", "1231@yrdsb.ca", "abcd@gmail.com");
-        RunEngine.AssignSubject("jim1", "Math", 11);
+        RunEngine.NewUser("Tutor", "nikag", "she/her",
+                "nika_g@gmail.com", "43134@yrdsb.ca", "nika_a@gmail.com");
+        RunEngine.AssignSubject("nikag", "Math", 11);
         String out = RunEngine.searchTutors("Tutor", "Math", 11);
         System.out.println(out);
     }
