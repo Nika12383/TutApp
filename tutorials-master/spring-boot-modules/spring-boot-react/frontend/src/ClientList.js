@@ -25,8 +25,9 @@ class ClientList extends Component {
                 'Content-Type': 'application/json'
             }
         }).then(() => {
-            let updatedClients = [...this.state.clients].filter(i => i.id !== id);
-            this.setState({clients: updatedClients});
+            fetch('/clients')
+                        .then(response => response.json())
+                        .then(data => this.setState({clients: data}));
         });
     }
 
