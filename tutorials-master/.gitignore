@@ -5,6 +5,7 @@ bin/
 
 # Package Files #
 *.jar
+!custom-pmd-0.0.1.jar
 *.war
 *.ear
 
