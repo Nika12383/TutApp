@@ -16,6 +16,7 @@ class App extends Component {
             <Route path='/clients' exact={true} component={ClientList}/>
             <Route path='/clients/:id' component={ClientEdit}/>
             <Route path='/query' exact={true} component={SearchQuery}/>
+            <Route path='/signup' exact={true} component={SignUp}/>
           </Switch>
         </Router>
     )
