@@ -1,0 +1,19 @@
+.sidebar {
+    width: 15%;
+    height: 100vh;
+    background-color: #FF0000;
+}
+.users {
+    width: 85%;
+    height: 100%;
+}
+
+.user {
+    border: 2px solid black;
+}
+
+#gradelabel {
+    padding: 10px
+}
+
+.rowC{display:flex; flex-direction:row;}

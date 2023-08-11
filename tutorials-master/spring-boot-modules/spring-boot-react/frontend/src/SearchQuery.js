@@ -1,35 +1,48 @@
 import React, { Component } from 'react';
 import { Button, ButtonGroup, Container, Table } from 'reactstrap';
 import AppNavbar from './AppNavbar';
+import './SearchQuery.css';
 import { Link } from 'react-router-dom';
 
 class SearchQuery extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {response: [], subject: '', grade: ''};
+        this.state = {response: [], role: 'Tutor', subject: 'All', grade: 'All', amount: ''};
         this.search = this.search.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    async search(subject, grade) {
-        const response = await fetch(`/query/${subject}/${grade}`);
+    async search(role, subject, grade) {
+        const response = await fetch(`/query/${role}/${subject}/${grade}`);
         const searchResults = await response.json();
-        this.setState({response: searchResults});
+        this.setState({response: searchResults, amount: searchResults.records.length});
+    }
+
+    componentDidMount() {
+        this.search(this.state.role, this.state.subject, this.state.grade);
     }
 
     handleChange(e) {
             const action = e.target.name;
-            if (action == 'subject') {
-                this.setState({subject: e.target.value})
-            } else {
-                this.setState({grade: e.target.value})
+            console.log(action)
+            switch (action) {
+                case "role":
+                    this.setState({role: e.target.value});
+                    console.log(e.target.value)
+                    break;
+                case "subject":
+                    this.setState({subject: e.target.value});
+                    break;
+                case "grade":
+                    this.setState({grade: e.target.value})
+                    break;
             }
         }
 
     handleSubmit(e) {
-        this.search(this.state.subject, this.state.grade)
+        this.search(this.state.role, this.state.subject, this.state.grade)
         e.preventDefault();
     }
 
@@ -37,49 +50,68 @@ class SearchQuery extends Component {
         const tutors = this.state.response.records;
         let tutorList = ''
         switch (tutors) {
-            case "No Users Found":
-                tutorList = <p>No Users Found</p>;
+            case "You messed up your syntax or are trying to inject sql":
+                tutorList = <p>You messed up your syntax or are trying to inject sql.</p>;
                 break;
             case "Database Connection Error":
                 tutorList = <p>Database Connection Error</p>
                 break;
+            case "How you got this error message is beyond me ;-;":
+                <p>How you got this error message is beyond me ;-;</p>
             default:
-                tutorList = tutors?.map(tutor => {
-                    return <tr>
-                        <td>{tutor[1]}</td>
-                        <td>{tutor[2]}</td>
-                        <td>{tutor[3]}</td>
-                    </tr>
-                });
+                if (tutors?.length == 0) {
+                    tutorList = <p>No Users Found</p>
+                } else {
+                    tutorList = tutors?.map(tutor => {
+                        return <tr>
+                            <td>
+                            <div class="user">
+                            <h4>{tutor[1]}</h4>
+                            <p id="gradelabel">{tutor[3]}-Grade {tutor[5]}</p>
+                            </div>
+                            </td>
+                        </tr>
+                    });
+                }
+
         }
         return (
             <div>
                 <AppNavbar/>
-                <form onSubmit={this.handleSubmit}>
-                    <label>
-                      Subject:
-                      <input type="text" name='subject' value={this.state.subject} onChange={this.handleChange} />
-                    </label>
-                    <label>
-                      Grade:
-                      <input type="text" name='grade' value={this.state.grade} onChange={this.handleChange} />
-                    </label>
-                    <input type="submit" value="Submit" />
-                </form>
-                   <Container fluid>
-                       <Table className="mt-4">
-                           <thead>
-                           <tr>
-                               <th width="30%">Name</th>
-                               <th width="30%">Pronouns</th>
-                               <th width="40%">Email</th>
-                           </tr>
-                           </thead>
-                           <tbody>
-                           {tutorList}
-                           </tbody>
-                       </Table>
-                   </Container>
+                <div class="rowC">
+                <div class="sidebar">
+                <Container fluid>
+                        <form onSubmit={this.handleSubmit}>
+                            <label>
+                              Role:
+                              <select name="role" onChange={this.handleChange}>
+                                <option value="Tutor">Tutor</option>
+                                <option value="Student">Student</option>
+                              </select>
+                            </label>
+                            <label>
+                              Subject:
+                              <input type="text" name='subject' value={this.state.subject} onChange={this.handleChange} />
+                            </label>
+                            <label>
+                              Grade:
+                              <input type="text" name='grade' value={this.state.grade} onChange={this.handleChange} />
+                            </label>
+                            <input type="submit" value="Submit" />
+                        </form>
+               </Container>
+               </div>
+               <div class="users">
+               <Container fluid>
+                   <h3>{this.state.amount} Users Found</h3>
+                   <Table className="mt-4">
+                       <tbody>
+                       {tutorList}
+                       </tbody>
+                   </Table>
+               </Container>
+               </div>
+               </div>
             </div>
         );
     }

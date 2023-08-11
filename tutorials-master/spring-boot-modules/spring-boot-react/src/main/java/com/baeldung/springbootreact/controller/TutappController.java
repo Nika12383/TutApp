@@ -11,9 +11,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/query")
 public class TutappController {
-    @GetMapping("/{subject}/{grade}")
-    public String getTutors(@PathVariable String subject, @PathVariable int grade) {
-        return RunEngine.searchTutors("Tutor", subject, grade);
+    @GetMapping("/{role}/{subject}/{grade}")
+    public String getTutors(@PathVariable String role, @PathVariable String subject, @PathVariable String grade) {
+        return RunEngine.searchTutors(role, subject, grade);
     }
 
 }
