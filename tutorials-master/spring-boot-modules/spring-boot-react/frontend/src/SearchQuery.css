@@ -13,7 +13,13 @@
 }
 
 #gradelabel {
-    padding: 10px
+    padding-left: 10px
 }
+
+#namelabel {
+    padding-left:10px;
+}
+
+hr { margin-top: 10px; margin-bottom: 10px }
 
 .rowC{display:flex; flex-direction:row;}

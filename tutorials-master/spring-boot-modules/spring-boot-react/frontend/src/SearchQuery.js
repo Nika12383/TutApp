@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
+import { useState } from "react";
 import { Button, ButtonGroup, Container, Table } from 'reactstrap';
+import { Link } from 'react-router-dom';
+import { Modal } from './Modal';
 import AppNavbar from './AppNavbar';
 import './SearchQuery.css';
-import { Link } from 'react-router-dom';
+
 
 class SearchQuery extends Component {
 
@@ -66,8 +69,9 @@ class SearchQuery extends Component {
                         return <tr>
                             <td>
                             <div class="user">
-                            <h4>{tutor[1]}</h4>
-                            <p id="gradelabel">{tutor[3]}-Grade {tutor[5]}</p>
+                            <h4 id="namelabel">{tutor[1]}</h4>
+                            <hr />
+                            <p id="gradelabel">{tutor[3]}-Grade {tutor[5]} {tutor[4]}</p>
                             </div>
                             </td>
                         </tr>
