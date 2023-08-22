@@ -7,18 +7,23 @@ import com.mysql.cj.jdbc.exceptions.CommunicationsException;
 import org.jooq.impl.DSL;
 
 public final class RunEngine {
-    public static String searchTutors(String role, String subject, String grade) {
+    public String searchTutors(String role, String subject, String grade) {
         String json;
         try {
-            Connection conn = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/tutapp",
-                    "myuser", "1986");
+            Connection conn = GetConnection();
+            if (conn == null) {
+                return "{\"records\":\"Database Connection Error\"}";
+            };
             Statement stmt = conn.createStatement();
             String action;
             if (Objects.equals(subject, "All") && Objects.equals(grade, "All")) {
-                action = "SELECT * FROM tutapp.new_view;";
+                action = "SELECT * FROM tutapp.new_view WHERE role = '" + role + "';";
+            } else if (Objects.equals(subject, "All")) {
+                action = "SELECT * FROM tutapp.new_view WHERE role = '" + role + "' and grade = '" + grade + "';";
+            } else if (Objects.equals(grade, "All")) {
+                action = "SELECT * FROM tutapp.new_view WHERE role = '" + role + "' and subject = '" + subject + "';";
             } else {
-                action = "SELECT * FROM tutapp.new_view WHERE role = '" + role + "' and subject = '" + subject + "' and grade = " + grade + ";";
+                action = "SELECT * FROM tutapp.new_view WHERE role = '" + role + "' and subject = '" + subject + "' and grade = '" + grade + "';";
             }
             ResultSet results = stmt.executeQuery(action);
             json = DSL.using(conn).fetch(results).formatJSON();
@@ -41,9 +46,7 @@ public final class RunEngine {
     
     public static void NewUser(String role, String name, String pronouns, String p_email, String s_email, String a_email) {
         try {
-            Connection conn = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/tutapp",
-                    "myuser", "1986");
+            Connection conn = GetConnection();
             Statement stmt = conn.createStatement();
             conn.setAutoCommit(false);
 
@@ -83,12 +86,27 @@ public final class RunEngine {
         }
     }
 
-    public static void AssignSubject(String name, String subject, int grade) {
-        try {
-            Connection conn = DriverManager.getConnection(
+    private static Connection GetConnection(){
+        Connection conn = null;
+        try{
+             conn = DriverManager.getConnection(
                     "jdbc:mysql://localhost:3306/tutapp",
                     "myuser", "1986");
+             conn.setAutoCommit(false);
+
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return conn;
+    }
+
+    public static void AssignSubject(String name, String subject, int grade) {
+        try {
+            Connection conn = GetConnection();
             Statement stmt = conn.createStatement();
+
+
             conn.setAutoCommit(false);
 
             try {

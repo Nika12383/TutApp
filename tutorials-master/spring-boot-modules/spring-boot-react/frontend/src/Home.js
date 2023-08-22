@@ -14,7 +14,6 @@ class Home extends Component {
                 <UserCreation/>
                 <UserSubject/>
                 <Container fluid>
-                    <Button color="link"><Link to="/clients">Clients</Link></Button>
                     <Button color="link"><Link to="/query">Search</Link></Button>
                     <Button color="link"><Link to="/testpage">Testing</Link></Button>
                 </Container>

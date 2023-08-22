@@ -1,24 +1,34 @@
-import React, {Component} from 'react';
+import React, { useState } from 'react';
 import {Navbar, NavbarBrand} from 'reactstrap';
+import { useAuth0 } from "@auth0/auth0-react";
 import {Link} from 'react-router-dom';
+import LoginButton from './LoginButton';
+import LogoutButton from './LogoutButton';
+import "./AppNavbar.css";
 
-export default class AppNavbar extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {isOpen: false};
-        this.toggle = this.toggle.bind(this);
-    }
+function AppNavbar() {
+    const [isOpen, setOpen] = useState(false);
+    const { user, isAuthenticated } = useAuth0();
 
-    toggle() {
-        this.setState({
-            isOpen: !this.state.isOpen
-        });
-    }
+    const toggle = () => {
+        setOpen(!isOpen);
+    };
 
-    render() {
-        return <Navbar color="dark" dark expand="md">
-            <NavbarBrand tag={Link} to="/">Home</NavbarBrand>
-            <NavbarBrand tag={Link} to="/query">Find Users</NavbarBrand>
-        </Navbar>;
-    }
+    const status = isAuthenticated ? <div class = "topnav-right">
+                                     <NavbarBrand id="test">Welcome {user.name}</NavbarBrand>
+                                     <LogoutButton/>
+                                     </div> :
+                                     <div class = "topnav-right">
+                                     <LoginButton/>
+                                     </div>;
+
+    return (
+        <Navbar color="dark" dark expand="md">
+           <NavbarBrand tag={Link} to="/">Home</NavbarBrand>
+           <NavbarBrand tag={Link} to="/query">Find Users</NavbarBrand>
+           {status}
+        </Navbar>
+    );
 }
+
+export default AppNavbar;
