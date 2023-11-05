@@ -145,4 +145,21 @@ public final class RunEngine {
             e.printStackTrace();
         }
     }
+    public static boolean userExistence(String email) {
+        try {
+            Connection conn = GetConnection();
+            Statement stmt = conn.createStatement();
+            //String emailData = "select * from tutapp.users where personal_email = '" + email + "';";
+            ResultSet results = stmt.executeQuery("select count(personal_email) from tutapp.users where personal_email = '" + email + "';");
+            //int amount = results.getMetaData().getPrecision(3);
+            results.next();
+            //String emailResult = results.getString("personal_email");
+            //return Objects.equals(email, emailResult);
+            System.out.println( Objects.equals(1, results.getInt("count(personal_email)")));
+            return Objects.equals(1, results.getInt("count(personal_email)"));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 }

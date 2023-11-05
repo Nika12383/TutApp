@@ -9,7 +9,7 @@ public class UserCreationController {
     @PostMapping
     public void newUser(@RequestBody String data) {
         JSONObject obj = new JSONObject(data);
-        RunEngine.NewUser(obj.getString("role"), obj.getString("name"), obj.getString("pronouns"), obj.getString("personalEmail"), obj.getString("schoolEmail"), obj.getString("adultEmail"));
+        RunEngine.NewUser(obj.getString("roleData"), obj.getString("nameData"), obj.getString("pronounsData"), obj.getString("personalEmailData"), obj.getString("schoolEmailData"), obj.getString("adultEmailData"));
     }
 
 }

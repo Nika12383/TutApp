@@ -1,13 +1,7 @@
 package com.baeldung.springbootreact.controller;
-import com.baeldung.springbootreact.controller.RunEngine;
 
-import com.mysql.cj.x.protobuf.MysqlxDatatypes;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.List;
 
 @RestController
 @RequestMapping("/query")

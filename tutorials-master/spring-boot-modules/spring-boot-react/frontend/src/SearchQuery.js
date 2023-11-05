@@ -43,11 +43,12 @@ function SearchQuery() {
         setUEmail(email);
         setOpen(true);
     };
+
     const handleClose = () => setOpen(false);
 
     const search = async (role, subject, grade) => {
-        const response = await fetch(`/query/${role}/${subject}/${grade}`);
-        const searchResults = await response.json();
+        const r = await fetch(`/query/${role}/${subject}/${grade}`);
+        const searchResults = await r.json();
         setResponse(searchResults);
         setAmount(parseInt(searchResults.records.length));
     };
@@ -77,30 +78,30 @@ function SearchQuery() {
     }
 
 
-    const tutors = response.records
-    let tutorList = ''
-    switch (tutors) {
+    const users = response.records
+    let userList = ''
+    switch (users) {
         case "You messed up your syntax or are trying to inject sql":
-            tutorList = <p>You messed up your syntax or are trying to inject sql.</p>;
+            userList = <p>You messed up your syntax or are trying to inject sql.</p>;
             break;
         case "Database Connection Error":
-            tutorList = <p>Database Connection Error</p>
+            userList = <p>Database Connection Error</p>
             break;
         case "How you got this error message is beyond me ;-;":
             <p>How you got this error message is beyond me ;-;</p>
         default:
-            if (tutors?.length == 0) {
-                tutorList = <p>No Users Found</p>
+            if (users?.length == 0) {
+                userList = <p>No Users Found</p>
             } else {
-                tutorList = tutors?.map(tutor => {
+                userList = users?.map(user => {
                     return <tr>
                         <td>
                         <Container fluid className="block-example border border-dark">
-                        <h4 id="namelabel">{tutor[1]}</h4>
+                        <h4 id="namelabel">{user[1]}</h4>
                         <hr />
-                        <p id="gradelabel">{tutor[3]}-Grade {tutor[5]} {tutor[4]}</p>
-                        {isAuthenticated ?
-                        <Button color="primary" onClick={() => handleOpen(tutor[1], tutor[3], tutor[5], tutor[4], tutor[2])}>Contact</Button>
+                        <p id="gradelabel">{user[3]}-Grade {user[5]} {user[4]}</p>
+                        {isAuthenticated ? //todo add second condition for checking if they are in the database
+                        <Button color="primary" onClick={() => handleOpen(user[1], user[3], user[5], user[4], user[2])}>Contact</Button>
                         : <p>Please log in to contact!</p>}
                         </Container>
                         </td>
@@ -135,9 +136,9 @@ function SearchQuery() {
                         <label class="labels">
                           Role:
                           <select id="Selector" name="role" onChange={handleChange}>
-                            <option value="Tutor">Tutor</option>
-                            <option value="Student">Student</option>
-                          </select>
+                                <option value="Tutor">Tutor</option>
+                                <option value="Student">Student</option>
+                              </select>
                         </label>
                         <label class="labels">
                            Subject:
@@ -178,7 +179,7 @@ function SearchQuery() {
                <h3>{amount} Users Found</h3>
                <Table className="mt-4">
                    <tbody>
-                   {tutorList}
+                   {userList}
                    </tbody>
                </Table>
            </Container>
